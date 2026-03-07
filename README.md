@@ -32,3 +32,8 @@ pip install -r requirements.txt
 
 ### 5 Run backend
 uvicorn backend.main:app --reload
+
+### 6 Create .env file in root folder
+
+MONGO_URL=mongodb://localhost:27017
+DB_NAME=fitfusion

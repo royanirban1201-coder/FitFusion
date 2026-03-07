@@ -1,14 +1,29 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
+# Import routers
 from backend.routes.ai.calorie import router as ai_router
-from backend.routes.crud.placeholder import router as crud_router
 
-app = FastAPI()
+app = FastAPI(title="FitFusion API")
 
-app.include_router(ai_router)
-app.include_router(crud_router)
+# CORS configuration
+origins = [
+    "http://localhost:3000",   # React frontend
+    "http://127.0.0.1:3000",
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+# Root route
 @app.get("/")
-def home():
-    return {"message": "FitFusion Backend Running 🚀"}
+def read_root():
+    return {"message": "FitFusion backend running"}
+
+# Include routers
+app.include_router(ai_router, prefix="/ai", tags=["AI"])

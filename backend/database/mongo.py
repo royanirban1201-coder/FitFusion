@@ -1,8 +1,7 @@
-from pymongo import MongoClient
+from dotenv import load_dotenv
+import os
 
-MONGO_URL = "mongodb://localhost:27017"
+load_dotenv()
 
-client = MongoClient(MONGO_URL)
-db = client["fitfusion"]
-
-print("MongoDB Connected Successfully 🚀")
+MONGO_URL = os.getenv("MONGO_URL")
+DB_NAME = os.getenv("DB_NAME")

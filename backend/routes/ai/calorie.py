@@ -1,25 +1,17 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
-from typing import List
-
+from backend.schemas.calorie_schema import CalorieRequest, CalorieResponse
 from backend.ml.analyzer import calorie_analysis
 
-router = APIRouter(
-    prefix="/ai",
-    tags=["AI"]
-)
+router = APIRouter()
 
+@router.post("/calorie", response_model=CalorieResponse)
+def analyze_calories(data: CalorieRequest):
 
-class CalorieData(BaseModel):
-    calories: int
+    result = calorie_analysis(
+        age=data.age,
+        height=data.height,
+        weight=data.weight,
+        activity=data.activity_level
+    )
 
-
-class CalorieRequest(BaseModel):
-    data: List[CalorieData]
-
-
-@router.post("/calorie-analysis")
-def ai_calorie_analysis(request: CalorieRequest):
-    formatted_data = [item.dict() for item in request.data]
-    result = calorie_analysis(formatted_data)
-    return result
+    return {"calories": result}
