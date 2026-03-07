@@ -12,3 +12,9 @@ venv/
 
 # VS Code
 .vscode/
+
+# IDE
+.idea/
+
+# Logs
+*.log

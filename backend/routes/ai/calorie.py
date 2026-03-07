@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List
 
-from ml.analyzer import calorie_analysis
+from backend.ml.analyzer import calorie_analysis
 
 router = APIRouter(
     prefix="/ai",

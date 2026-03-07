@@ -1,4 +1,4 @@
-from ml.preprocessing import prepare_calorie_features
+from backend.ml.preprocessing import prepare_calorie_features
 
 
 def calorie_analysis(food_logs):

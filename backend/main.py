@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from routes.ai.calorie import router as ai_router
-from routes.crud.placeholder import router as crud_router
+from backend.routes.ai.calorie import router as ai_router
+from backend.routes.crud.placeholder import router as crud_router
 
 app = FastAPI()
 
