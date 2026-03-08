@@ -24,6 +24,12 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"message": "FitFusion backend running"}
+@app.get("/health")
+def health_check():
+    return {"status": "backend running"}
+@app.get("/test")
+def test_api():
+    return {"message": "API working correctly"}
 
 # Include routers
 app.include_router(ai_router, prefix="/ai", tags=["AI"])

@@ -1,23 +1,17 @@
 from backend.ml.preprocessing import prepare_calorie_features
 
 
-def calorie_analysis(food_logs):
+def calorie_analysis(age, height, weight, activity):
 
-    features = prepare_calorie_features(food_logs)
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5
 
-    if features is None:
-        return {"message": "No data available"}
-
-    avg = features["avg_calories"]
-
-    if avg > 2500:
-        status = "High intake"
-    elif avg < 1800:
-        status = "Low intake"
+    if activity == "low":
+        multiplier = 1.2
+    elif activity == "moderate":
+        multiplier = 1.55
     else:
-        status = "Balanced"
+        multiplier = 1.9
 
-    return {
-        "features": features,
-        "status": status
-    }
+    calories = bmr * multiplier
+
+    return calories
